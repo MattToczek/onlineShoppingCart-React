@@ -42,7 +42,16 @@ function App() {
   }
 
   const addDiscount = ()=> {
+    const newArray = [...gameConsoles]
+    newArray.map((item)=>{
 
+      if(item.name === "PS4"){
+        item.price -=50}
+      
+    })
+    setConsoles( newArray )
+    console.log(gameConsoles);
+    
   }
 
   return (
@@ -50,7 +59,7 @@ function App() {
       {gameConsoles.map((device, i)=> {
         return (<li key="i">Buy the {device.name} for only {device.price}, released in {device.yearOfRelease} <button onClick = {() => addItem(i)}>Buy Now!</button> </li>)
       })}
-      <button onClick = {(event)=>{addItem(event)}}>Add Discount for PS4!</button>
+      <button onClick = {()=>{addDiscount()}}>Add Discount for PS4!</button>
       <div className = "list">
         {shoppingList.list.map((item)=>{
           return <div>{item}</div>
