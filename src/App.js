@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 
-  const [consoles, setConsoles] = useState(
+  const [gameConsoles, setConsoles] = useState(
     [
       {
         name: "PS4",
@@ -23,9 +23,43 @@ function App() {
     ]
   )
 
+  const [shoppingList, setshoppingList] = useState(
+    {
+      list: [],
+      total: 0
+    }
+  )
+
+  const addItem = (i) => {
+    setshoppingList(
+      {
+        list: [...shoppingList.list, gameConsoles[i].name],
+        total: shoppingList.total + gameConsoles[i].price
+      }
+    )
+    console.log(i);
+    
+  }
+
+  const addDiscount = ()=> {
+
+  }
+
   return (
     <div className="App">
- 
+      {gameConsoles.map((device, i)=> {
+        return (<li key="i">Buy the {device.name} for only {device.price}, released in {device.yearOfRelease} <button onClick = {() => addItem(i)}>Buy Now!</button> </li>)
+      })}
+      <button onClick = {(event)=>{addItem(event)}}>Add Discount for PS4!</button>
+      <div className = "list">
+        {shoppingList.list.map((item)=>{
+          return <div>{item}</div>
+        })}
+      </div>
+      <div>
+      <h2>Your total is: </h2>
+        {shoppingList.total}
+      </div>
     </div>
   );
 }
